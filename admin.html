@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quản lý Tài Khoản</title>
+</head>
+<body>
+    <h2>Danh sách tài khoản</h2>
+    <div id="userList"></div>
+    <form action="delete_user.php" method="post">
+        <label for="username">Xóa tài khoản:</label>
+        <input type="text" id="username" name="username" required>
+        <button type="submit">Xóa</button>
+    </form>
+    <script>
+    fetch('/src/get_users.php')
+        .then(response => response.json())
+        .then(data => {
+            let html = '';
+            data.forEach(user => {
+                html += `<p>${user.username}</p>`;
+            });
+            document.getElementById('userList').innerHTML = html;
+        });
+    </script>
+</body>
+</html>
